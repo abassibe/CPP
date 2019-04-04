@@ -1,0 +1,4 @@
+sos.sh
+*.o
+/objs
+maintest.cpp
