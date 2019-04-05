@@ -6,13 +6,13 @@
 #    By: abassibe <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/02/01 12:45:46 by abassibe          #+#    #+#              #
-#    Updated: 2018/04/16 01:20:22 by abassibe         ###   ########.fr        #
+#    Updated: 2019/04/05 17:47:05 by abassibe         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = wathever
 
-SRCS =	wathever.cpp \
+SRCS =	whatever.cpp \
 
 OBJS = $(SRCS:.cpp=.o)
 

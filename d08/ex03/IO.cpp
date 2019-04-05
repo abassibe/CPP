@@ -6,7 +6,7 @@
 /*   By: abassibe <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/03 17:27:28 by abassibe          #+#    #+#             */
-/*   Updated: 2019/04/03 17:27:38 by abassibe         ###   ########.fr       */
+/*   Updated: 2019/04/04 11:37:55 by abassibe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,13 +23,13 @@ PrintValue::PrintValue(PrintValue const& copy)
 PrintValue::~PrintValue()
 {}
 
-PrintValue	&PrintValue::operator=(PrintValue const& copy)
+PrintValue		&PrintValue::operator=(PrintValue const& copy)
 {
 	(void)copy;
 	return (*this);
 }
 
-int			PrintValue::execut(char *&tab, std::string buff, int &i) const
+int				PrintValue::execut(char *&tab, std::string buff, int &i) const
 {
 	(void)buff;
 	(void)i;
