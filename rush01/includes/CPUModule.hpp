@@ -6,7 +6,7 @@
 /*   By: abassibe <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/04 14:47:40 by abassibe          #+#    #+#             */
-/*   Updated: 2019/04/05 13:33:11 by abassibe         ###   ########.fr       */
+/*   Updated: 2019/04/06 15:28:38 by abassibe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@
 class CPUModule : public IMonitorModule
 {
 	public:
-		CPUModule(int x, int y, int sizeX = 50, int sizeY = 50);
+		CPUModule(int x, int y, int sizeX = 80, int sizeY = 15);
 		CPUModule(CPUModule const& copy);
 		virtual ~CPUModule();
 		CPUModule			&operator=(CPUModule const& copy);

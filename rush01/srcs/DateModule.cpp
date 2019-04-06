@@ -6,13 +6,13 @@
 /*   By: abassibe <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/04 15:00:28 by abassibe          #+#    #+#             */
-/*   Updated: 2019/04/05 11:27:47 by abassibe         ###   ########.fr       */
+/*   Updated: 2019/04/06 15:44:41 by abassibe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/DateModule.hpp"
 
-DateModule::DateModule() : _x(0), _y(0), _sizeX(50), _sizeY(50), _date(), _time(),
+DateModule::DateModule() : _x(0), _y(0), _sizeX(20), _sizeY(20), _date(), _time(),
 	_rawTime(time(&_rawTime)), _timeInfo(localtime(&_rawTime))
 {
 }
@@ -144,6 +144,10 @@ void		DateModule::setSize(int const& sizeX, int const& sizeY)
 
 void		DateModule::updateData()
 {
+	_rawTime = time(&_rawTime);
+	_timeInfo = localtime(&_rawTime);
+	_date = "";
+	_time = "";
 	std::string		month;
 	switch (_timeInfo->tm_mon)
 	{
@@ -190,7 +194,6 @@ void		DateModule::updateData()
 	_date = std::string(std::to_string(_timeInfo->tm_mday).c_str()) + " " + month + " " + std::to_string(_timeInfo->tm_year + 1900);
 	_time = std::string(std::to_string(_timeInfo->tm_hour).c_str()) + ":" +
 		std::to_string(_timeInfo->tm_min) + ":" + std::to_string(_timeInfo->tm_sec);
-
 }
 
 std::string		DateModule::getDate() const

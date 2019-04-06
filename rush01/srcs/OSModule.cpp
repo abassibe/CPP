@@ -6,14 +6,14 @@
 /*   By: abassibe <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/04 15:00:28 by abassibe          #+#    #+#             */
-/*   Updated: 2019/04/05 13:12:00 by abassibe         ###   ########.fr       */
+/*   Updated: 2019/04/06 15:28:15 by abassibe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <sys/utsname.h>
 #include "../includes/OSModule.hpp"
 
-OSModule::OSModule() : _x(0), _y(0), _sizeX(50), _sizeY(50), _productName(),
+OSModule::OSModule() : _x(0), _y(0), _sizeX(20), _sizeY(20), _productName(),
 	_productVersion(), _buildVersion(), _sysName(), _releaseVersion(),
 	_machineArchitecture()
 {
@@ -34,6 +34,8 @@ OSModule::OSModule(int x, int y, int sizeX, int sizeY) : _x(x), _y(y),
 	uname(&os);
 	_sysName = os.sysname;
 	_releaseVersion = os.version;
+	if (_releaseVersion.size() > static_cast<size_t>(_sizeX))
+		_releaseVersion.insert(_sizeX - 21, "\n ");
 	_machineArchitecture = os.machine;
 }
 

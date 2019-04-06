@@ -6,7 +6,7 @@
 /*   By: abassibe <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/04 14:47:40 by abassibe          #+#    #+#             */
-/*   Updated: 2019/04/04 17:20:38 by abassibe         ###   ########.fr       */
+/*   Updated: 2019/04/06 15:21:35 by abassibe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@
 class OSModule : public IMonitorModule
 {
 	public:
-		OSModule(int x, int y, int sizeX = 50, int sizeY = 50);
+		OSModule(int x, int y, int sizeX = 80, int sizeY = 15);
 		OSModule(OSModule const& copy);
 		virtual ~OSModule();
 		OSModule		&operator=(OSModule const& copy);

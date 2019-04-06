@@ -6,13 +6,13 @@
 /*   By: abassibe <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/04 15:00:28 by abassibe          #+#    #+#             */
-/*   Updated: 2019/04/05 16:22:44 by abassibe         ###   ########.fr       */
+/*   Updated: 2019/04/06 14:40:44 by abassibe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/CPUModule.hpp"
 
-CPUModule::CPUModule() : _x(0), _y(0), _sizeX(50), _sizeY(50), _model(),
+CPUModule::CPUModule() : _x(0), _y(0), _sizeX(20), _sizeY(20), _model(),
 	_clockSpeed(), _core(), _activity(), _previousActivity()
 {
 }

@@ -6,13 +6,13 @@
 /*   By: abassibe <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/04 15:00:28 by abassibe          #+#    #+#             */
-/*   Updated: 2019/04/05 17:46:20 by abassibe         ###   ########.fr       */
+/*   Updated: 2019/04/06 16:24:57 by abassibe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/NetworkModule.hpp"
 
-NetworkModule::NetworkModule() : _x(0), _y(0), _sizeX(50), _sizeY(50), _inputActivity(),
+NetworkModule::NetworkModule() : _x(0), _y(0), _sizeX(20), _sizeY(20), _inputActivity(),
 	_previousInputActivity(), _outputActivity(), _previousOutputActivity()
 {
 }
@@ -43,9 +43,9 @@ NetworkModule::NetworkModule(int x, int y, int sizeX, int sizeY) : _x(x), _y(y),
 		ss >> output;
 
 		ssInput << bytes_format(input);
-		ssInput << "/s input";
+		ssInput << "/s";
 		ssOutput << bytes_format(output);
-		ssOutput << "/s output";
+		ssOutput << "/s";
 		_inputActivity = ssInput.str();
 		_previousInputActivity.push_back(_inputActivity);
 		_outputActivity = ssOutput.str();
@@ -169,9 +169,9 @@ void		NetworkModule::updateData()
 		ss >> output;
 
 		ssInput << bytes_format(input);
-		ssInput << "/s input";
+		ssInput << "/s";
 		ssOutput << bytes_format(output);
-		ssOutput << "/s output";
+		ssOutput << "/s";
 		_inputActivity = ssInput.str();
 		_previousInputActivity.push_back(_inputActivity);
 		_outputActivity = ssOutput.str();

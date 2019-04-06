@@ -6,13 +6,22 @@
 #    By: abassibe <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/02/01 12:45:46 by abassibe          #+#    #+#              #
-#    Updated: 2019/04/04 09:33:42 by abassibe         ###   ########.fr        #
+#    Updated: 2019/04/06 17:42:07 by abassibe         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = ft_gkrellm
 
 SRCS =	main.cpp \
+		CPUModule.cpp \
+		DateModule.cpp \
+		HostModule.cpp \
+		OSModule.cpp \
+		RAMModule.cpp \
+		NetworkModule.cpp \
+		ConsoleView.cpp \
+		CPUActivityModule.cpp \
+		RAMActivityModule.cpp \
 
 OBJS = $(SRCS:.cpp=.o)
 
@@ -25,7 +34,7 @@ DIR_OBJ = objs/
 all: $(NAME)
 
 $(NAME): $(addprefix objs/, $(OBJS))
-	@g++ $(FLAGS) $^ -o $(NAME)
+	@g++ -lncurses $(FLAGS) $^ -o $(NAME)
 
 $(DIR_OBJ)%.o: $(SRCPATH)%.cpp
 	@mkdir -p objs

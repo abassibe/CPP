@@ -1,30 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   RAMModule.hpp                                      :+:      :+:    :+:   */
+/*   CPUActivityModule.hpp                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: abassibe <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/04 14:47:40 by abassibe          #+#    #+#             */
-/*   Updated: 2019/04/06 15:29:02 by abassibe         ###   ########.fr       */
+/*   Updated: 2019/04/06 17:36:56 by abassibe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef RAMMODULE_HPP
-# define RAMMODULE_HPP
+#ifndef CPUACTIVITYMODULE_HPP
+# define CPUACTIVITYMODULE_HPP
 
 # include <list>
-# include <sys/types.h>
 # include <sys/sysctl.h>
+# include <mach/mach_init.h>
+# include <mach/mach_error.h>
+# include <mach/mach_host.h>
+# include <mach/vm_map.h>
+# include <unistd.h>
 # include "IMonitorModule.hpp"
 
-class RAMModule : public IMonitorModule
+class CPUActivityModule : public IMonitorModule
 {
 	public:
-		RAMModule(int x, int y, int sizeX = 80, int sizeY = 15);
-		RAMModule(RAMModule const& copy);
-		virtual ~RAMModule();
-		RAMModule			&operator=(RAMModule const& copy);
+		CPUActivityModule(int x, int y, int sizeX = 80, int sizeY = 15);
+		CPUActivityModule(CPUActivityModule const& copy);
+		virtual ~CPUActivityModule();
+		CPUActivityModule			&operator=(CPUActivityModule const& copy);
 		virtual int			getX() const;
 		virtual int			getY() const;
 		virtual void		setX(int const& x);
@@ -36,18 +40,14 @@ class RAMModule : public IMonitorModule
 		virtual void		setSizeY(int const& sizeY);
 		virtual void		setSize(int const& sizeX, int const& sizeY);
 		virtual void		updateData();
-		long int			getRAMCapacity() const;
-		float				getRAMActivity() const;
 		std::list<float>	getPreviousActivity() const;
 
 	private:
-		RAMModule();
+		CPUActivityModule();
 		int					_x;
 		int					_y;
 		int					_sizeX;
 		int					_sizeY;
-		int64_t				_RAMCapacity;
-		float				_RAMActivity;
 		std::list<float>	_previousActivity;
 };
 

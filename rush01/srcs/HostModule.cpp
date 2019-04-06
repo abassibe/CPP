@@ -6,13 +6,13 @@
 /*   By: abassibe <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/04 15:00:28 by abassibe          #+#    #+#             */
-/*   Updated: 2019/04/05 11:13:16 by abassibe         ###   ########.fr       */
+/*   Updated: 2019/04/06 14:40:59 by abassibe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/HostModule.hpp"
 
-HostModule::HostModule() : _x(0), _y(0), _sizeX(50), _sizeY(50), _hostName(),
+HostModule::HostModule() : _x(0), _y(0), _sizeX(20), _sizeY(20), _hostName(),
 	_loginName(), _domaineName()
 {
 }

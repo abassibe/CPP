@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   RAMModule.cpp                                      :+:      :+:    :+:   */
+/*   RAMActivityModule.cpp                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: abassibe <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/04 15:00:28 by abassibe          #+#    #+#             */
-/*   Updated: 2019/04/06 15:57:07 by abassibe         ###   ########.fr       */
+/*   Updated: 2019/04/06 17:39:29 by abassibe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/RAMModule.hpp"
+#include "../includes/RAMActivityModule.hpp"
 
 static double ParseMemValue(const char * b)
 {
@@ -19,22 +19,14 @@ static double ParseMemValue(const char * b)
 	return (isdigit(*b) ? atof(b) : -1.0);
 }
 
-RAMModule::RAMModule() : _x(0), _y(0), _sizeX(20), _sizeY(20), _RAMCapacity(0),
-	_RAMActivity(), _previousActivity()
+RAMActivityModule::RAMActivityModule() : _x(0), _y(0), _sizeX(20), _sizeY(20), _previousActivity()
 {
 }
 
-RAMModule::RAMModule(int x, int y, int sizeX, int sizeY) : _x(x), _y(y),
+RAMActivityModule::RAMActivityModule(int x, int y, int sizeX, int sizeY) : _x(x), _y(y),
 	_sizeX(sizeX), _sizeY(sizeY)
 {
-	//Fill _RAMCapacity
-	int			mib[2];
-	size_t		length = sizeof(int64_t);
-	mib[0] = CTL_HW;
-	mib[1] = HW_MEMSIZE;
-	sysctl(mib, 2, &_RAMCapacity, &length, NULL, 0);
-
-	//Fill _RAMActivity
+	//Fill _RAMActivityActivity
 	FILE	*fpIn = popen("/usr/bin/vm_stat", "r");
 	if (fpIn)
 	{
@@ -59,104 +51,92 @@ RAMModule::RAMModule(int x, int y, int sizeX, int sizeY) : _x(x), _y(y),
 		pclose(fpIn);
 		if (totalPages > 0.0)
 		{
-			_RAMActivity = static_cast<float>(pagesUsed/totalPages) * 100;
-			_previousActivity.push_back(_RAMActivity);
+			_previousActivity.push_back(static_cast<float>(pagesUsed/totalPages) * 100);
 		}
 	}
-	else
-		_RAMActivity =  0.0f;
 }
 
-RAMModule::RAMModule(RAMModule const& copy) : _x(copy._x), _y(copy._y), _sizeX(copy._sizeX),
-	_sizeY(copy._sizeY), _RAMCapacity(copy._RAMCapacity), _previousActivity(copy._previousActivity)
+RAMActivityModule::RAMActivityModule(RAMActivityModule const& copy) : _x(copy._x), _y(copy._y), _sizeX(copy._sizeX),
+	_sizeY(copy._sizeY), _previousActivity(copy._previousActivity)
 {
 }
 
-RAMModule::~RAMModule()
+RAMActivityModule::~RAMActivityModule()
 {
 }
 
-RAMModule	&RAMModule::operator=(RAMModule const& copy)
+RAMActivityModule	&RAMActivityModule::operator=(RAMActivityModule const& copy)
 {
 	_x = copy._x;
 	_y = copy._y;
 	_sizeX = copy._sizeX;
 	_sizeY = copy._sizeY;
-	_RAMCapacity = copy._RAMCapacity;
-	_RAMActivity = copy._RAMActivity;
 	_previousActivity = copy._previousActivity;
 	return (*this);
 }
 
-int			RAMModule::getX() const
+int			RAMActivityModule::getX() const
 {
 	return (_x);
 }
 
-int			RAMModule::getY() const
+int			RAMActivityModule::getY() const
 {
 	return (_y);
 }
 
-void		RAMModule::setX(int const& x)
+void		RAMActivityModule::setX(int const& x)
 {
 	_x = x;
 }
 
-void		RAMModule::setY(int const& y)
+void		RAMActivityModule::setY(int const& y)
 {
 	_y = y;
 }
 
-void		RAMModule::setPos(int const& x, int const& y)
+void		RAMActivityModule::setPos(int const& x, int const& y)
 {
 	_x = x;
 	_y = y;
 }
 
-int			RAMModule::getSizeX() const
+int			RAMActivityModule::getSizeX() const
 {
 	return (_sizeX);
 }
 
-int			RAMModule::getSizeY() const
+int			RAMActivityModule::getSizeY() const
 {
 	return (_sizeY);
 }
 
-void		RAMModule::setSizeX(int const& sizeX)
+void		RAMActivityModule::setSizeX(int const& sizeX)
 {
 	_sizeX = sizeX;
 }
 
-void		RAMModule::setSizeY(int const& sizeY)
+void		RAMActivityModule::setSizeY(int const& sizeY)
 {
 	_sizeY = sizeY;
 }
 
-void		RAMModule::setSize(int const& sizeX, int const& sizeY)
+void		RAMActivityModule::setSize(int const& sizeX, int const& sizeY)
 {
 	_sizeX = sizeX;
 	_sizeY = sizeY;
 }
 
-void		RAMModule::updateData()
+void		RAMActivityModule::updateData()
 {
-	//Fill _RAMCapacity
-	int			mib[2];
-	size_t		length = sizeof(int64_t);
-	mib[0] = CTL_HW;
-	mib[1] = HW_MEMSIZE;
-	sysctl(mib, 2, &_RAMCapacity, &length, NULL, 0);
-
-	//Fill _RAMActivity
+	//Fill _RAMActivityActivity
 	FILE	*fpIn = popen("/usr/bin/vm_stat", "r");
 	if (fpIn)
 	{
 		double	pagesUsed = 0.0;
 		double	totalPages = 0.0;
 		char	buf[512];
-		while(fgets(buf, sizeof(buf), fpIn) != NULL)
+		while (fgets(buf, sizeof(buf), fpIn) != NULL)
 		{
 			if (strncmp(buf, "Pages", 5) == 0)
 			{
@@ -174,26 +154,12 @@ void		RAMModule::updateData()
 		pclose(fpIn);
 		if (totalPages > 0.0)
 		{
-			_RAMActivity = static_cast<float>(pagesUsed/totalPages) * 100;
-			_previousActivity.push_back(_RAMActivity);
+			_previousActivity.push_back(static_cast<float>(pagesUsed/totalPages) * 100);
 		}
 	}
-	else
-		_RAMActivity =  0.0f;
-
 }
 
-long int		RAMModule::getRAMCapacity() const
-{
-	return (static_cast<long int>(_RAMCapacity / 1000000000));
-}
-
-float			RAMModule::getRAMActivity() const
-{
-	return (_RAMActivity);
-}
-
-std::list<float>	RAMModule::getPreviousActivity() const
+std::list<float>	RAMActivityModule::getPreviousActivity() const
 {
 	return (_previousActivity);
 }

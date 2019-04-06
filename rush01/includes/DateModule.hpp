@@ -6,7 +6,7 @@
 /*   By: abassibe <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/04 14:47:40 by abassibe          #+#    #+#             */
-/*   Updated: 2019/04/05 11:09:31 by abassibe         ###   ########.fr       */
+/*   Updated: 2019/04/06 15:28:43 by abassibe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@
 class DateModule : public IMonitorModule
 {
 	public:
-		DateModule(int x, int y, int sizeX = 50, int sizeY = 50);
+		DateModule(int x, int y, int sizeX = 80, int sizeY = 15);
 		DateModule(DateModule const& copy);
 		virtual ~DateModule();
 		DateModule		&operator=(DateModule const& copy);

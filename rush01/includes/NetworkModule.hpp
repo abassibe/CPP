@@ -6,7 +6,7 @@
 /*   By: abassibe <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/04 14:47:40 by abassibe          #+#    #+#             */
-/*   Updated: 2019/04/05 17:26:22 by abassibe         ###   ########.fr       */
+/*   Updated: 2019/04/06 15:28:55 by abassibe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@
 class NetworkModule : public IMonitorModule
 {
 	public:
-		NetworkModule(int x, int y, int sizeX = 50, int sizeY = 50);
+		NetworkModule(int x, int y, int sizeX = 80, int sizeY = 15);
 		NetworkModule(NetworkModule const& copy);
 		virtual ~NetworkModule();
 		NetworkModule			&operator=(NetworkModule const& copy);
