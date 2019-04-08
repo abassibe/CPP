@@ -6,7 +6,7 @@
 #    By: abassibe <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/02/01 12:45:46 by abassibe          #+#    #+#              #
-#    Updated: 2019/04/06 17:42:07 by abassibe         ###   ########.fr        #
+#    Updated: 2019/04/07 18:52:18 by dhadley          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -22,6 +22,7 @@ SRCS =	main.cpp \
 		ConsoleView.cpp \
 		CPUActivityModule.cpp \
 		RAMActivityModule.cpp \
+		GraphicalView.cpp \
 
 OBJS = $(SRCS:.cpp=.o)
 
@@ -31,14 +32,17 @@ FLAGS = -Wall -Wextra -Werror
 
 DIR_OBJ = objs/
 
+LIBS = -L ~/.brew/lib -lsfml-graphics -lsfml-window -lsfml-system -Wl,-rpath ~/.brew/lib
+
+
 all: $(NAME)
 
 $(NAME): $(addprefix objs/, $(OBJS))
-	@g++ -lncurses $(FLAGS) $^ -o $(NAME)
+	@g++ -lncurses $(LIBS) $(FLAGS) $^ -o $(NAME)
 
 $(DIR_OBJ)%.o: $(SRCPATH)%.cpp
 	@mkdir -p objs
-	@g++ $(FLAGS) -c $< -o $@ -I includes
+	@g++ $(FLAGS) -c $< -o $@ -I includes -I SFML/include
 
 .PHONY: all clean fclean re
 

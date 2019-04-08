@@ -11,6 +11,7 @@
 /* ************************************************************************** */
 
 #include <ncurses.h>
+#include <SFML/Graphics.hpp>
 #include "../includes/HostModule.hpp"
 #include "../includes/OSModule.hpp"
 #include "../includes/DateModule.hpp"
@@ -20,6 +21,7 @@
 #include "../includes/ConsoleView.hpp"
 #include "../includes/CPUActivityModule.hpp"
 #include "../includes/RAMActivityModule.hpp"
+#include "../includes/GraphicalView.hpp"
 
 void	consoleView()
 {
@@ -48,6 +50,23 @@ void	consoleView()
 void	graphicalView()
 {
 	std::cout << "GRAPHICAL" << std::endl;
+
+	GraphicalView view;
+
+    view.addModule(new HostModule(0, 0,800, 150));
+    view.addModule(new OSModule(800, 0, 800, 150));
+    view.addModule(new DateModule(1600, 0, 800, 150));
+    view.addModule(new CPUModule(0, 150, 800, 150));
+    view.addModule(new RAMModule(800, 150, 800, 150));
+    view.addModule(new NetworkModule(1600, 150, 800, 150));
+    view.addModule(new CPUActivityModule(0, 300, 800, 150));
+    view.addModule(new RAMActivityModule(800, 300, 800, 150));
+
+	sf::RenderWindow window(sf::VideoMode(2410,750), "Monitor Rush01", sf::Style::Close | sf::Style::Titlebar);
+
+	view._window = &window;
+
+	view.render();
 }
 
 int		main(int ac, char **av)
